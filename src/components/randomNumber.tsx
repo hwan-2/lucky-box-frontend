@@ -1,9 +1,9 @@
 import useNumberStore from "../store/useNumberStore.js";
-import {useState} from "react";
+import React, {useState} from "react";
 
 const RandomNumbers = () => {
 
-    const { showNumbers, showNumbersH, numbers, hundredTriedNumbers, getBallColor, showRandomNumbers, showHundredTriedNumbers } = useNumberStore()
+    const { showNumbers, numbers, getBallColor, showRandomNumbers } = useNumberStore()
     const [isFading, setIsFading] = useState<boolean>(false)
     const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false)
 
@@ -14,21 +14,6 @@ const RandomNumbers = () => {
 
         setTimeout(() => {
             showRandomNumbers()
-            setIsFading(false)
-        }, 500)
-
-        //버튼 시간 수정
-        setTimeout(()=>{
-            setIsButtonDisabled(false)
-        }, 1000)
-    }
-
-    const isHundredReroll = () => {
-        setIsFading(true)
-        setIsButtonDisabled(true)
-
-        setTimeout(() => {
-            showHundredTriedNumbers()
             setIsFading(false)
         }, 500)
 
@@ -49,6 +34,9 @@ const RandomNumbers = () => {
             </div>
             <div>
                 <button className={`reroll-btn ${showNumbers ? "show" : ""}`} onClick={isReroll} disabled={isButtonDisabled}>다시 돌리실래요?</button>
+            </div>
+            <div>
+                <a className={`link-text ${showNumbers ? "show" : ""}`} href="/expert">혹시 100번을 한번에 돌려보고 싶으신가요? →</a>
             </div>
 
         </div>

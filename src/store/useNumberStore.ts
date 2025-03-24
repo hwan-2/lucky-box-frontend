@@ -6,6 +6,7 @@ interface NumberStore {
     showNumbersH: boolean
     numbers: number[]
     hundredTriedNumbers: number[][]
+    mostFrequency: number[]
     triggerMove: () => void
     showRandomNumbers: () => void
     showHundredTriedNumbers: () => void
@@ -20,6 +21,8 @@ const useNumberStore = create<NumberStore>((set) => ({
     showNumbersH: false,
     numbers: [],
     hundredTriedNumbers: [],
+    mostFrequency: [],
+
     triggerMove: () => set({ moveUp: true }),
 
     //랜덤숫자 6개 뽑기
@@ -40,12 +43,26 @@ const useNumberStore = create<NumberStore>((set) => ({
     //100번 반복하기
     showHundredTriedNumbers: () => {
         const results: number[][] = []
+        const frequencyMap = new Map<number, number>()
+
         for (let i = 0; i < 100; i++) {
-            const numbers = useNumberStore.getState().generateRandomNumbers()
+            const numbers:number[] = useNumberStore.getState().generateRandomNumbers()
             results.push(numbers)
+
+            //평균을 내기 위한 빈도 저장
+            numbers.forEach(num => {
+                frequencyMap.set(num, (frequencyMap.get(num) || 0) + 1)
+            })
         }
 
-        set({ showNumbers: true, showNumbersH: true, hundredTriedNumbers: results })
+        //가장 높은 6개 추출
+        const mostFrequencyNumbers:number[] = [...frequencyMap.entries()]
+            .sort((a:[number, number], b:[number, number]) => b[1] - a[1]) //내림차순 분류
+            .slice(0, 6) // 가장높은 6개 자르기
+            .map(entry => entry[0])
+            .sort((a:number, b:number) => a - b) // 보기좋게 오름차순 분류
+
+        set({ showNumbersH: true, hundredTriedNumbers: results, mostFrequency: mostFrequencyNumbers })
     },
 
     //공 색
