@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import './Home.css'
 import useNumberStore from "../store/useNumberStore.js"
-import RandomNumbers from "../components/randomNumber.jsx";
+import RandomNumbers from "../components/randomNumber.js";
 
 
 const Home = () => {
@@ -11,11 +11,11 @@ const Home = () => {
     useEffect(() => {
         setTimeout(triggerMove, 2000)
         setTimeout(showRandomNumbers, 3000)
-    }, [])
+    }, [triggerMove, showRandomNumbers])
 
     return (
         <div>
-            <div className="container">
+            <div>
                 <h1 className={`text ${moveUp ? "move-up" : ""}`}>안전한 놀이터</h1>
                 <RandomNumbers />
             </div>
