@@ -36,7 +36,7 @@ const RandomNumbers = () => {
                 <button className={`reroll-btn ${showNumbers ? "show" : ""}`} onClick={isReroll} disabled={isButtonDisabled}>다시 돌리실래요?</button>
             </div>
             <div>
-                <a className={`link-text ${showNumbers ? "show" : ""}`} href="/expert">혹시 100번을 한번에 돌려보고 싶으신가요? →</a>
+                <a className={`link-text ${showNumbers ? "show" : ""}`} href="/expert">혹시 10000번을 한번에 돌려보고 싶으신가요? →</a>
             </div>
 
         </div>

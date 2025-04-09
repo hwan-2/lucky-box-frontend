@@ -6,7 +6,7 @@ const Navbar = () => {
         <nav className="navbar">
             <ul>
                 <li><a href="/">메인</a></li>
-                <li><a href="/expert">심화과정</a></li>
+                <li><a href="/expert">심화</a></li>
             </ul>
         </nav>
     );
